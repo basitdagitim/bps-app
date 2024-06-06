@@ -1,0 +1,10 @@
+#!/bin/bash
+for item in $(ls /home)
+do
+rm -rf /home/$item/.firefox
+cp -R  /etc/skel/.firefox /home/$item/.firefox
+chown -R $item:$item  /home/$item/.firefox
+chmod -R 755 /home/$item/.firefox
+done
+
+
