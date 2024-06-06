@@ -22,7 +22,7 @@ package(){
 mkdir -p $DESTDIR/etc
 mkdir -p $DESTDIR/etc/skel
 cp -prfv $SOURCEDIR $DESTDIR/etc/skel/.firefox
-cp -prfv ../files/.mozilla $DESTDIR/etc/skel/.mozilla
+#cp -prfv ../files/.mozilla $DESTDIR/etc/skel/.mozilla
 
 #mkdir -p $DESTDIR/usr/
 #mkdir -p $DESTDIR/usr/share
