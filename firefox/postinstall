@@ -1,0 +1,45 @@
+#!/bin/bash
+for item in $(ls /home)
+do
+rm -rf /home/$item/.firefox
+cp -R  /etc/skel/.firefox /home/$item/.firefox
+chown -R $item:$item  /home/$item/.firefox
+chmod -R 755 /home/$item/.firefox
+done
+
+certificateFile="/tmp/fatih.pem"
+certificateName="fatihby" 
+#/usr/local/share/ca-certificates
+wget http://sertifika.meb.gov.tr/MEB_SERTIFIKASI.cer -O /tmp/MEB_SERTIFIKASI.cer
+openssl x509 -inform DER -in /tmp/MEB_SERTIFIKASI.cer -out /tmp/MEB_SERTIFIKASI.crt
+openssl x509 -in /tmp/MEB_SERTIFIKASI.crt -out /tmp/fatih.pem -outform PEM
+
+######################profil kopyalanır#######################
+for item in $(ls /etc/skel/.mozilla/firefox)
+do
+if [[ -f /etc/skel/.mozilla/firefox/$item/cert9.db ]] ; then 
+	for userhome in $(ls /home)
+	do
+		#echo $userhome
+		cp -R /etc/skel/.mozilla/firefox/$item /home/$userhome/.mozilla/firefox/myprofil
+		chown -R $userhome:$userhome  /home/$userhome/.mozilla/firefox/myprofil
+		#chgrp -R $userhome
+		chmod -R 755 /home/$userhome/.mozilla/firefox/myprofil
+	done
+fi
+done
+######################sertifika yükleniyor#######################
+
+
+for item in $(ls /home)
+do
+	for certDB in $(find  /home/$item/.mozilla* -name "cert9.db")
+	do
+	  certDir=$(dirname ${certDB});
+	  #log "mozilla certificate" "install '${certificateName}' in ${certDir}"
+	  certutil -A -n "${certificateName}" -t "TCu,Cuw,Tuw" -i ${certificateFile} -d sql:${certDir}
+	done
+
+done
+
+

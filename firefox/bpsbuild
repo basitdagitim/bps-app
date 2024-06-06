@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+name="firefox"
+version="1.0"
+description="firefox browser"
+source="https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=tr"
+depends=""
+builddepend="glibc"
+group="sys.base"
+
+
+setup(){
+	cp -prfv $PACKAGEDIR/files /tmp/bps/build/
+	cd $SOURCEDIR
+}
+
+build(){
+	echo ""
+	
+}
+
+package(){
+mkdir -p $DESTDIR/etc
+mkdir -p $DESTDIR/etc/skel
+cp -prfv $SOURCEDIR $DESTDIR/etc/skel/.firefox
+cp -prfv ../files/.mozilla $DESTDIR/etc/skel/.mozilla
+
+#mkdir -p $DESTDIR/usr/
+#mkdir -p $DESTDIR/usr/share
+#mkdir -p $DESTDIR/usr/share/applications
+#mkdir -p $DESTDIR/usr/share/applications
+
+install -Dm644 "../files/tarayici.desktop" "$DESTDIR//usr/share/applications/tarayici.desktop"
+install -Dm644 "../files/tarayici.svg" "$DESTDIR//usr/share/icons/tarayici.svg"
+}
+
