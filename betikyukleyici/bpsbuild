@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 name="betikyukleyici"
-#version="1.8.5"
 version="master"
 description="Linuxta kullanıcının gui olarak betik(script) yüklemesi için yazılmıştır"
 source="https://github.com/bayramkarahan/betikyukleyici/archive/refs/heads/master.zip"
