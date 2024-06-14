@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+name="betikyukleyici"
+#version="1.8.5"
+version="master"
+description="Linuxta kullanıcının gui olarak betik(script) yüklemesi için yazılmıştır"
+source="https://github.com/bayramkarahan/betikyukleyici/archive/refs/heads/master.zip"
+depends="qt5-base"
+builddepend=""
+group="app.misc"
+
+setup () {
+	export PATH=/usr/bin/qt5:$PATH
+	cd $SOURCEDIR
+	qmake betikyukleyici.pro
+}
+
+build () {
+    make
+}
+
+package () {
+    make INSTALL_ROOT=$DESTDIR install
+}
+
