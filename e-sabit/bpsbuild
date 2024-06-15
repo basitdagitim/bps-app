@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+name="e-sabit"
+version="master"
+description="Linuxta e-sabit"
+source="https://github.com/bayramkarahan/e-sabit/archive/refs/heads/master.zip"
+depends="qt5-base"
+builddepend=""
+group="app.misc"
+
+setup () {
+	export PATH=/usr/bin/qt5:$PATH
+	cd $SOURCEDIR
+	qmake e-sabit.pro
+}
+
+build () {
+    make
+}
+
+package () {
+    make INSTALL_ROOT=$DESTDIR install
+}
+

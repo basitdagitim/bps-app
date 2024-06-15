@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+name="e-zil"
+version="master"
+description="zil programı"
+source="https://github.com/bayramkarahan/e-zil/archive/refs/heads/master.zip"
+depends="qt5-base"
+builddepend=""
+group="app.misc"
+
+setup () {
+	export PATH=/usr/bin/qt5:$PATH
+	cd $SOURCEDIR
+	qmake e-zil.pro
+}
+
+build () {
+    make
+}
+
+package () {
+    make INSTALL_ROOT=$DESTDIR install
+}
+

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+name="zamanligorev"
+version="master"
+description="zamanlı görev"
+source="https://github.com/bayramkarahan/zamanligorev/archive/refs/heads/master.zip"
+depends="qt5-base"
+builddepend=""
+group="app.misc"
+
+setup () {
+	export PATH=/usr/bin/qt5:$PATH
+	cd $SOURCEDIR
+	qmake zamanligorev.pro
+}
+
+build () {
+    make
+}
+
+package () {
+    make INSTALL_ROOT=$DESTDIR install
+}
+
